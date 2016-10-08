@@ -3,6 +3,6 @@
   <p>
     <label><%= l(:label_parent_issue) %></label>
     <%= hidden_field_tag 'settings[parent_issue]', '0' %>
-    <%= check_box_tag 'settings[parent_issue]', '1', settings['parent_issue'].eql?('1') ? true : false %>
+    <%= check_box_tag 'settings[parent_issue]', '1', settings['parent_issue'].eql?('0') ? false : true %>
   </p>
 </fieldset>

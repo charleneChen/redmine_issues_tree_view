@@ -1,0 +1,31 @@
+span.tree-indent, span.tree-expander, span.tree, span.tree-inline, span.tree-joinbottom, span.tree-expanded, span.tree-collapsed {
+    display: inline-block;
+    width: 16px;
+    height: 18px;
+    vertical-align: top;
+    overflow: hidden;
+}
+tr span.tree-expander {
+    cursor: pointer;
+}
+tr.collapse span.tree-expander {
+    background: url("../images/tree_icons.png") no-repeat -64px 0;
+}
+tr.open span.tree-expander {
+    background: url("../images/tree_icons.png") no-repeat -80px 0;
+}
+tr span.tree {
+    background: url("../images/tree_icons.png") no-repeat -192px 0;
+}
+tr td.subject span.tree-inline {
+    background: url("../images/tree_icons.png") no-repeat -176px 0;
+}
+tr td.subject span.tree-joinbottom {
+    background: url("../images/tree_icons.png") no-repeat -160px 0;
+}
+tr td.subject span.tree-expanded {
+    background: url("../images/tree_icons.png") no-repeat -144px 0;
+}
+tr td.subject span.tree-collapsed {
+    background: url("../images/tree_icons.png") no-repeat -128px 0;
+}

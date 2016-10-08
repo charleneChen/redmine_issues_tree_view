@@ -1,0 +1,6 @@
+# English strings go here for Rails i18n
+en:
+  # my_label: "My label"
+  tree_table_plugin: Issues Tree Table plugin settings
+  label_parent_issue: Add parent issue as one of select options
+  parent_issue: Parent issue

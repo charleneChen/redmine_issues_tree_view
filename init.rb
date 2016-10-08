@@ -2,7 +2,6 @@ require_dependency 'query_patch'
 require_dependency 'issue_query_patch'
 require_dependency 'issues_helper_patch'
 require_dependency 'issues_hook'
-require_dependency 'issues_controller_patch_for_tree'
 
 Redmine::Plugin.register :issues_tree_table do
   name 'Issues Tree Table plugin'

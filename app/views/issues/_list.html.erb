@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         <% if query.group_by.eql?('parent') %>
-            <% grouped_issue_list(issues, @query, @issue_count_by_group) do |issue, level, group_name, group_count, group_totals| -%>
+            <% issue_list(issues) do |issue, level| -%>
                 <% open = issue.children.any? ? 'open' : nil %>
 
                 <tr id="issue-<%= issue.id %>" data-depth="<%= level %>"

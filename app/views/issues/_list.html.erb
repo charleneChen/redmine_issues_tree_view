@@ -14,7 +14,8 @@
         </tr>
         </thead>
         <tbody>
-        <% if query.group_by.eql?('parent') %>
+        <%# if query.group_by.eql?('parent') %>
+        <% unless Setting.plugin_issues_tree_table['parent_issue'].eql?('0') %>
             <% issue_list(issues) do |issue, level| -%>
                 <% open = issue.children.any? ? 'open' : nil %>
 

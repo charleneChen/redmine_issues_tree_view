@@ -26,9 +26,9 @@ module IssueQueryPatch
     end
 
     def tree_table_plugin_checked?
-      if Setting.plugin_issues_tree_table['parent_issue'].eql?('1')
+      if Setting.plugin_redmine_issues_tree_view['parent_issue'].eql?('1')
         return true
-      elsif Setting.plugin_issues_tree_table['parent_issue'].eql?('0')
+      elsif Setting.plugin_redmine_issues_tree_view['parent_issue'].eql?('0')
         return false
       else
         return true

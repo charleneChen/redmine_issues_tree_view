@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         <%# if query.group_by.eql?('parent') %>
-        <% unless Setting.plugin_issues_tree_table['parent_issue'].eql?('0') %>
+        <% unless Setting.plugin_redmine_issues_tree_view['parent_issue'].eql?('0') %>
             <% issue_list(issues) do |issue, level| -%>
                 <% open = issue.children.any? ? 'open' : nil %>
 
@@ -75,5 +75,5 @@
     </div>
 <% end -%>
 
-<%= javascript_include_tag 'tree_table', :plugin => 'issues_tree_table' %>
-<%= stylesheet_link_tag 'tree_table', :plugin => 'issues_tree_table' %>
+<%= javascript_include_tag 'tree_table', :plugin => 'redmine_issues_tree_view' %>
+<%= stylesheet_link_tag 'tree_table', :plugin => 'redmine_issues_tree_view' %>

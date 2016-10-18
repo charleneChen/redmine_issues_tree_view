@@ -3,6 +3,7 @@ This is a Redmine plugin which can turn issues default index view into a tree vi
 
 ## Author
 Charlene Chen
+
 Contact: charlene.chen168@gmail.com
 
 ## Installation

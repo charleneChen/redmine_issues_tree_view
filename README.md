@@ -29,14 +29,8 @@ After restarting, issues in the index view are grouped by parent issue by defaul
 <p style='color:red;'>Note: after installing this plugin, checkbox in the plugin setting page is checked by default. You can uncheck it without uninstall the plugin to removed the side effect of this plugin.</p>
 
 ## Example of interface
-**Here is a default issues list:**
-![](./assets/images/example.png)
-
-**And here is the default group_by select options:**
+**Here is a default issues list and the default group_by select options:**
 ![](./assets/images/default_group_by.png)
 
-**Here is same issues list, but in the tree view:**
-![](./assets/images/issues_tree_view_example.png)
-
-And here is the same group_by select options, but adding 'parent(父任务)' option:
+**Here is same issues list with group_by select options, but in the tree view and adding 'parent(父任务)' option:**
 ![](./assets/images/issues_tree_view_groupby.png)

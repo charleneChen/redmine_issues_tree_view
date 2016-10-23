@@ -19,15 +19,20 @@ module QueryPatch
         end
       end
       # small change here || self.group_by
+      # why? self.group_by was assigned to 'parent' by after_initialize callback set_group_by when checked this plugin
       self.group_by = params[:group_by] || (params[:query] && params[:query][:group_by]) || self.group_by
       self.column_names = params[:c] || (params[:query] && params[:query][:column_names])
       self.totalable_names = params[:t] || (params[:query] && params[:query][:totalable_names])
       self
     end
 
+    # Return edited sort order SQL that can group by parent issue
     def group_by_sort_order_with_tree_table
       if grouped? && (column = group_by_column)
         order = (sort_criteria_order_for(column.name) || column.default_order).try(:upcase)
+        # in the case of grouping by parent,
+        # for column.name is parent, because one of its sortable has order by default
+        # this default order should be removed, otherwise, it will cause SQL syntax error
         column.sortable.is_a?(Array) ?
             column.sortable.collect {|s| s.split().last.downcase.eql?('asc') ? "#{s}" : "#{s} #{order}"}.join(',') :
             "#{column.sortable} #{order}"

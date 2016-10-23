@@ -12,7 +12,11 @@ module IssuesTreeViewIssuesControllerPatch
       retrieve_query
       sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
 
-      # Enable sort function when setting of this plugin is checked
+      # Reset query group_by when unchecked this plugin
+      if Setting.plugin_redmine_issues_tree_view['parent_issue'].eql?('0') && @query.group_by.eql?('parent')
+        @query.group_by = ''
+      end
+      # Enable sort function when checked this plugin
       if @query.group_by.eql?('parent')
         # This affect sort_update method below
         session[sort_name] = nil
@@ -38,7 +42,8 @@ module IssuesTreeViewIssuesControllerPatch
         end
 
         @issue_count = @query.issue_count
-        @issue_pages = Paginator.new @issue_count, @limit, params['page']
+        # Adding Redmine::Pagination::, otherwise, const Paginator cannot be found
+        @issue_pages = Redmine::Pagination::Paginator.new @issue_count, @limit, params['page']
         @offset ||= @issue_pages.offset
         @issues = @query.issues(:include => [:assigned_to, :tracker, :priority, :category, :fixed_version],
                                 :order => sort_clause,

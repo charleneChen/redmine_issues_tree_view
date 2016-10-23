@@ -23,9 +23,20 @@ Contact: charlene.chen168@gmail.com
 Just install the plugin.
 After restarting, issues in the index view are grouped by parent issue by default and the view is modified and rendered using the views provided by the plugin.
 
-## Example of interface
-Here is a default issues list:
-![](./assets/images/)
+### Plugin setting page
+![](./assets/images/plugin_setting.png)
 
-Here is same issues list, but in the tree view:
+<p style='color:red;'>Note: after installing this plugin, checkbox in the plugin setting page is checked by default. You can uncheck it without uninstall the plugin to removed the side effect of this plugin.</p>
+
+## Example of interface
+**Here is a default issues list:**
+![](./assets/images/example.png)
+
+**And here is the default group_by select options:**
+![](./assets/images/default_group_by.png)
+
+**Here is same issues list, but in the tree view:**
 ![](./assets/images/issues_tree_view_example.png)
+
+And here is the same group_by select options, but adding 'parent(父任务)' option:
+![](./assets/images/issues_tree_view_groupby.png)

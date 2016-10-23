@@ -14,8 +14,7 @@
         </tr>
         </thead>
         <tbody>
-        <%# if query.group_by.eql?('parent') %>
-        <% unless Setting.plugin_redmine_issues_tree_view['parent_issue'].eql?('0') %>
+        <% if query.group_by.eql?('parent') %>
             <% issue_list(issues) do |issue, level| -%>
                 <% open = issue.children.any? ? 'open' : nil %>
 

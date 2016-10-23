@@ -18,7 +18,7 @@ module IssueQueryPatch
         if options[:order].count != 1
           order_option = [options[:order]].flatten.reject(&:blank?)
         else
-          order_option = option[:order][0].split().last.downcase.eql?('asc') ?
+          order_option = options[:order][0].split().last.downcase.eql?('asc') ?
               [options[:order]].flatten.reject(&:blank?) : [group_by_sort_order].flatten.reject(&:blank?)
         end
       else

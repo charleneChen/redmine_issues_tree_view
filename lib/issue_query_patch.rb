@@ -14,7 +14,7 @@ module IssueQueryPatch
     def issues_with_tree_view(options={})
       # Fix the bug caused by issues tree view plugin
       # To enable sort function when setting of this plugin is checked
-      if self.group_by == 'parent'
+      if self.group_by == 'parent' && options[:order]
         if options[:order].count != 1
           order_option = [options[:order]].flatten.reject(&:blank?)
         else

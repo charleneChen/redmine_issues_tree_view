@@ -1,10 +1,10 @@
 <fieldset>
-  <legend><%= l(:tree_table_plugin) %></legend>
+  <legend><%= l(:legend_tree_table_plugin_settings) %></legend>
   <p>
-    <label><%= l(:label_parent_issue) %></label>
+    <label><%= l(:label_add_parent_issue) %></label>
     <!--when unchecked, settings['parent_issue'] is '0'-->
     <%= hidden_field_tag 'settings[parent_issue]', '0' %>
     <!--settings['parent_issue'] is true by default, when checked, settings['parent_issue'] is '1'-->
-    <%= check_box_tag 'settings[parent_issue]', '1', settings['parent_issue'].eql?('0') ? false : true %>
+    <%= check_box_tag 'settings[parent_issue]', '1', !settings['parent_issue'].eql?('0') %>
   </p>
 </fieldset>

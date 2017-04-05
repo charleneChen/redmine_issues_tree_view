@@ -1,19 +1,38 @@
-span.tree-indent, span.tree-expander, span.tree, span.tree-inline, span.tree-joinbottom, span.tree-expanded, span.tree-collapsed {
+span.tree-indent, span.tree-expander, span.tree, span.tree-inline, span.tree-joinbottom,
+span.tree-child-parent, span.tree-special-leaf, span.tree-root {
     display: inline-block;
     width: 16px;
     height: 18px;
     vertical-align: top;
     overflow: hidden;
 }
-tr span.tree-expander {
+span.tree-expander, span.tree-root, span.tree-special-leaf {
     cursor: pointer;
 }
+/* last child parent issue */
 tr.collapse span.tree-expander {
     background: url("../images/tree_icons.png") no-repeat -64px 0;
 }
 tr.open span.tree-expander {
     background: url("../images/tree_icons.png") no-repeat -80px 0;
 }
+
+/* parent issue */
+tr.collapse span.tree-child-parent {
+    background: url("../images/tree_icons.png") no-repeat -144px 0;
+}
+tr.open span.tree-child-parent {
+    background: url("../images/tree_icons.png") no-repeat -128px 0;
+}
+
+/* root issue */
+tr.collapse span.tree-root {
+    background: url("../images/treeicon-3.png") no-repeat 0 0;
+}
+tr.open span.tree-root {
+    background: url("../images/treeicon-4.png") no-repeat 0 0;
+}
+
 tr span.tree {
     background: url("../images/tree_icons.png") no-repeat -192px 0;
 }
@@ -23,9 +42,8 @@ tr td.subject span.tree-inline {
 tr td.subject span.tree-joinbottom {
     background: url("../images/tree_icons.png") no-repeat -160px 0;
 }
-tr td.subject span.tree-expanded {
-    background: url("../images/tree_icons.png") no-repeat -144px 0;
-}
-tr td.subject span.tree-collapsed {
-    background: url("../images/tree_icons.png") no-repeat -128px 0;
+
+/* for those parent nodes whose children are all closed */
+tr td.subject span.tree-special-leaf {
+    background: url("../images/tree_icons.png") no-repeat -240px 0;
 }

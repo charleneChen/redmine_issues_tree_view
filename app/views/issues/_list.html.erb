@@ -14,10 +14,21 @@
         </tr>
         </thead>
         <tbody>
-        <% if query.group_by.eql?('parent') %>
-            <% issue_list(issues) do |issue, level| -%>
+        <% grouped_issue_list(issues, @query, @issue_count_by_group) do |issue, level, group_name, group_count, group_totals| -%>
+            <% if group_name && !query.group_by.eql?('parent') %>
+                <% reset_cycle %>
+                <tr class="group open">
+                  <td colspan="<%= query.inline_columns.size + 2 %>">
+                    <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
+                    <span class="name"><%= group_name %></span> <span class="count"><%= group_count %></span>
+                    <span class="totals"><%= group_totals %></span>
+                    <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}",
+                                         "toggleAllRowGroups(this)", :class => 'toggle-all') %>
+                  </td>
+                </tr>
+            <% end %>
+            <% if query.group_by.eql?('parent') %>
                 <% open = issue.children.any? ? 'open' : nil %>
-
                 <tr id="issue-<%= issue.id %>" data-depth="<%= level %>"
                     class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "indent indent-#{level}" : nil %> <%= open %>">
                   <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
@@ -34,41 +45,20 @@
                     }.join
                   %>
                 </tr>
-                <% @query.block_columns.each do |column|
-                  if (text = column_content(column, issue)) && text.present? -%>
-                        <tr class="<%= current_cycle %>">
-                          <td colspan="<%= @query.inline_columns.size + 1 %>" class="<%= column.css_classes %>"><%= text %></td>
-                        </tr>
-                    <% end -%>
-                <% end -%>
-            <% end -%>
-        <% else %>
-            <% grouped_issue_list(issues, @query, @issue_count_by_group) do |issue, level, group_name, group_count, group_totals| -%>
-                <% if group_name %>
-                    <% reset_cycle %>
-                    <tr class="group open">
-                      <td colspan="<%= query.inline_columns.size + 2 %>">
-                        <span class="expander" onclick="toggleRowGroup(this);">&nbsp;</span>
-                        <span class="name"><%= group_name %></span> <span class="count"><%= group_count %></span>
-                        <span class="totals"><%= group_totals %></span>
-                        <%= link_to_function("#{l(:button_collapse_all)}/#{l(:button_expand_all)}",
-                                             "toggleAllRowGroups(this)", :class => 'toggle-all') %>
-                      </td>
-                    </tr>
-                <% end %>
+            <% else %>
                 <tr id="issue-<%= issue.id %>" class="hascontextmenu <%= cycle('odd', 'even') %> <%= issue.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
                   <td class="checkbox hide-when-print"><%= check_box_tag("ids[]", issue.id, false, :id => nil) %></td>
                   <%= raw query.inline_columns.map { |column| "<td class=\"#{column.css_classes}\">#{column_content(column, issue)}</td>" }.join %>
                 </tr>
-                <% @query.block_columns.each do |column|
-                  if (text = column_content(column, issue)) && text.present? -%>
-                        <tr class="<%= current_cycle %>">
-                          <td colspan="<%= @query.inline_columns.size + 1 %>" class="<%= column.css_classes %>"><%= text %></td>
-                        </tr>
-                    <% end -%>
-                <% end -%>
+            <% end %>
+            <% @query.block_columns.each do |column|
+              if (text = column_content(column, issue)) && text.present? -%>
+                    <tr class="<%= current_cycle %>">
+                      <td colspan="<%= @query.inline_columns.size + 1 %>" class="<%= column.css_classes %>"><%= text %></td>
+                    </tr>
+              <% end -%>
             <% end -%>
-        <% end %>
+        <% end -%>
         </tbody>
       </table>
     </div>

@@ -1,6 +1,4 @@
-# English strings go here for Rails i18n
 en:
-  # my_label: "My label"
-  tree_table_plugin: Issues Tree View plugin settings
-  label_parent_issue: Add parent issue as one of group_by options
+  legend_tree_table_plugin_settings: Issues Tree View plugin settings
+  label_add_parent_issue: Add parent issue as one of group_by options
   parent_issue: Parent issue

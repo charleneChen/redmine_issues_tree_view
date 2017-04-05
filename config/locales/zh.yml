@@ -1,4 +1,4 @@
 zh:
-  tree_table_plugin: 问题列表树状结构显示插件的配置
-  label_parent_issue: 添加'父任务'分组选项
+  legend_tree_table_plugin_settings: 问题列表树状结构显示插件的配置
+  label_add_parent_issue: 添加'父任务'作为 group_by 分组选项
   parent_issue: 父任务

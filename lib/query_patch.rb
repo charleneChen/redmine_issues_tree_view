@@ -1,15 +1,12 @@
 module QueryPatch
-  def self.included(klass)
-    klass.send(:include, InstanceMethods)
+  extend ActiveSupport::Concern
 
-    klass.class_eval do
-      alias_method_chain :build_from_params, :tree_table
-      alias_method_chain :group_by_sort_order, :tree_table
-    end
+  included do
+    prepend PrependMethodsForQuery
   end
 
-  module InstanceMethods
-    def build_from_params_with_tree_table(params)
+  module PrependMethodsForQuery
+    def build_from_params(params)
       if params[:fields] || params[:f]
         self.filters = {}
         add_filters(params[:fields] || params[:f], params[:operators] || params[:op], params[:values] || params[:v])
@@ -27,7 +24,7 @@ module QueryPatch
     end
 
     # Return edited sort order SQL that can group by parent issue
-    def group_by_sort_order_with_tree_table
+    def group_by_sort_order
       if grouped? && (column = group_by_column)
         order = (sort_criteria_order_for(column.name) || column.default_order).try(:upcase)
         # in the case of grouping by parent,
@@ -38,8 +35,8 @@ module QueryPatch
             "#{column.sortable} #{order}"
       end
     end
-
   end
+
 end
 
 Query.send(:include, QueryPatch)

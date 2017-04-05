@@ -1,14 +1,12 @@
 module IssuesTreeViewIssuesControllerPatch
-  def self.included(klass)
-    klass.send(:include, InstanceMethods)
+  extend ActiveSupport::Concern
 
-    klass.class_eval do
-      alias_method_chain :index, :tree_view
-    end
+  included do
+    prepend PrependInstanceMethods
   end
 
-  module InstanceMethods
-    def index_with_tree_view
+  module PrependInstanceMethods
+    def index
       retrieve_query
       sort_init(@query.sort_criteria.empty? ? [['id', 'desc']] : @query.sort_criteria)
 
@@ -71,6 +69,7 @@ module IssuesTreeViewIssuesControllerPatch
       render_404
     end
   end
+
 end
 
 IssuesController.send(:include, IssuesTreeViewIssuesControllerPatch)

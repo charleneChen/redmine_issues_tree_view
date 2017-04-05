@@ -7,7 +7,7 @@ Redmine::Plugin.register :redmine_issues_tree_view do
   name 'Redmine Issues Tree View'
   author 'Charlene Chen'
   description 'This is a plugin for Redmine. Issues can be grouped by parent issue after adding this plugin.'
-  version '0.2'
+  version '0.3'
   url 'https://github.com/charleneChen/redmine_issues_tree_view'
   author_url 'http://blog.xlchen.com/'
 

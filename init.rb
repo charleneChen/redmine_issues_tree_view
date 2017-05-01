@@ -3,6 +3,13 @@ require_dependency 'issue_query_patch'
 require_dependency 'issues_helper_patch'
 require_dependency 'issues_tree_view_issues_controller_patch'
 
+Rails.configuration.to_prepare do
+  IssueQuery.send(:include, IssueQueryPatch)
+  IssuesHelper.send(:include, IssuesHelperPatch)
+  IssuesController.send(:include, IssuesTreeViewIssuesControllerPatch)
+  Query.send(:include, QueryPatch)
+end
+
 Redmine::Plugin.register :redmine_issues_tree_view do
   name 'Redmine Issues Tree View'
   author 'Charlene Chen'
@@ -15,4 +22,5 @@ Redmine::Plugin.register :redmine_issues_tree_view do
       'parent_issue' => true
   },
            :partial => 'settings/issues_tree_view'
+
 end

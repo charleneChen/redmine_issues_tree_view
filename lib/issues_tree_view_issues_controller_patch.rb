@@ -2,6 +2,11 @@ module IssuesTreeViewIssuesControllerPatch
   extend ActiveSupport::Concern
 
   included do
+    unless included_modules.include?(SortHelper)
+      puts "===== include SortHelper for redmine version greater than 3.2.2 ====="
+      include SortHelper
+      helper :sort
+    end
     prepend PrependInstanceMethods
   end
 
@@ -49,6 +54,7 @@ module IssuesTreeViewIssuesControllerPatch
                                 :limit => @limit)
         @issue_count_by_group = @query.issue_count_by_group
 
+
         respond_to do |format|
           format.html { render :template => 'issues/index', :layout => !request.xhr? }
           format.api  {
@@ -71,5 +77,3 @@ module IssuesTreeViewIssuesControllerPatch
   end
 
 end
-
-IssuesController.send(:include, IssuesTreeViewIssuesControllerPatch)

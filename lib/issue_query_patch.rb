@@ -5,6 +5,16 @@ module IssueQueryPatch
     after_initialize :set_group_by, :if => :tree_table_plugin_checked?
     after_initialize :reset_groupable, :unless => :tree_table_plugin_checked?
 
+    unless instance_methods.include?(:issue_count_by_group)
+      # Returns the issue count by group or nil if query is not grouped
+      puts '===== issue_count_by_group method added for redmine version greater than 3.2.2 ====='
+      def issue_count_by_group
+        grouped_query do |scope|
+          scope.count
+        end
+      end
+    end
+
     prepend PrependMethodsForIssueQuery
   end
 
@@ -79,5 +89,3 @@ module IssueQueryPatch
   end
 
 end
-
-IssueQuery.send(:include, IssueQueryPatch)

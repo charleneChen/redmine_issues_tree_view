@@ -2,6 +2,13 @@ module QueryPatch
   extend ActiveSupport::Concern
 
   included do
+    unless instance_methods.include?(:sort_criteria_order_for)
+      puts "===== sort_criteria_order_for method added for redmine version greater than 3.2.2 ====="
+      def sort_criteria_order_for(key)
+        sort_criteria.detect {|k, order| key.to_s == k}.try(:last)
+      end
+    end
+
     prepend PrependMethodsForQuery
   end
 
@@ -38,5 +45,3 @@ module QueryPatch
   end
 
 end
-
-Query.send(:include, QueryPatch)

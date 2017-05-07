@@ -39,7 +39,7 @@ var IssuesTree = (function () {
 
                 // change last leaf image of one child parent
                 var children = findChildren($(this));
-                var leaf_children = children.filter('.child:not(.parent');
+                var leaf_children = children.filter('.child:not(.parent)');
                 updateTreeStyle(leaf_children);
             });
         });
@@ -189,7 +189,7 @@ $(function () {
     // nodes without treeView and specialTreeView classes are leaf nodes
     // in addition, the following step cannot moved to another place because treeView and specialTreeView classes
     // were added in the previous steps
-    $allTrElements.not('.treeView, .specialTreeView').filiter('.child').find('span').each(function () {
+    $allTrElements.not('.treeView, .specialTreeView').filter('.child').find('span').each(function () {
         $(this).removeClass('tree').addClass('tree-special-leaf');
         $(this).attr('title', '这是一个子任务,它的父任务有可能已经关闭、在上一页、是另一个项目的、当前问题列表根据其他字段重新排序了');
     });

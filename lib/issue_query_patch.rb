@@ -21,7 +21,7 @@ module IssueQueryPatch
   module PrependMethodsForIssueQuery
     def issues(options={})
       # To enable sort by field functions even group by parent parent issue
-      if self.group_by == 'parent'
+      if self.group_by == 'parent' && options[:order]
         if options[:order].count == 1
           order_option = [options[:order]].flatten.reject(&:blank?)
         else
